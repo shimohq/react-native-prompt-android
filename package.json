@@ -1,0 +1,24 @@
+{
+    "name": "react-native-prompt-android",
+    "version": "0.0.1",
+    "description": "Polyfill for Alert.prompt on Android",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/shimohq/react-native-prompt-android"
+    },
+    "license": "MIT",
+    "keywords": [
+        "react-component",
+        "react-native",
+        "prompt",
+        "Alert"
+    ],
+    "scripts": {
+        "lint": "eslint ./"
+    },
+    "devDependencies": {
+        "babel-eslint": "^6.1.2",
+        "eslint": "^2.13.1",
+        "eslint-plugin-react": "^4.3.0"
+    }
+}
