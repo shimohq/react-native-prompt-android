@@ -1,0 +1,5 @@
+rootProject.name = 'PromptAndroid'
+
+include ':app'
+include ':react-native-prompt'
+project(':react-native-prompt').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-prompt-android/android')
