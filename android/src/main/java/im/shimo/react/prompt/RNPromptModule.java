@@ -102,7 +102,10 @@ public class RNPromptModule extends ReactContextBaseJavaModule implements Lifecy
             args.putString(RNPromptFragment.ARG_TITLE, options.getString(KEY_TITLE));
         }
         if (options.hasKey(KEY_MESSAGE)) {
-            args.putString(RNPromptFragment.ARG_MESSAGE, options.getString(KEY_MESSAGE));
+            String message = options.getString(KEY_MESSAGE);
+            if (!message.isEmpty()) {
+                args.putString(RNPromptFragment.ARG_MESSAGE, options.getString(KEY_MESSAGE));
+            }
         }
         if (options.hasKey(KEY_BUTTON_POSITIVE)) {
             args.putString(RNPromptFragment.ARG_BUTTON_POSITIVE, options.getString(KEY_BUTTON_POSITIVE));
