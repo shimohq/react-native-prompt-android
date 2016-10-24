@@ -1,5 +1,5 @@
 # react-native-prompt-android
-A polyfill library for Alert.prompt on Android platform
+A polyfill library for Alert.prompt on Android platform, working both on Android and iOS platform(iOS using [AlertIOS.prompt](http://facebook.github.io/react-native/docs/alertios.html#prompt))
 
 
 ### Installation
@@ -41,3 +41,7 @@ prompt(
     }
 );
 ```
+
+![Android Screen Shoot](./Example/android.png)
+
+![Android Screen Shoot](./Example/ios.png)
