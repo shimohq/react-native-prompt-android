@@ -22,6 +22,23 @@ type Options = {
     placeholder?: ?String;
 };
 
+/**
+ * Array or buttons
+ * @typedef {Array} ButtonsArray
+ * @property {string=} text Button label
+ * @property {Function=} onPress Callback function when button pressed
+ */
+type ButtonsArray = Array<{
+    /**
+     * Button label
+     */
+        text?: string,
+    /**
+     * Callback function when button pressed
+     */
+        onPress?: ?Function,
+}>;
+
 export default function prompt(
     title: ?string,
     message?: ?string,
