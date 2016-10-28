@@ -1,4 +1,7 @@
-const PromptAndroid = require('NativeModules').PromptAndroid;
+import {
+    NativeModules
+} from 'react-native';
+const PromptAndroid = NativeModules.PromptAndroid;
 
 export type PromptType = $Enum<{
     /**
