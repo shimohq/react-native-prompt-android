@@ -6,13 +6,12 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Paint;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.RectShape;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.widget.EditText;
-
-import com.facebook.react.modules.dialog.AlertFragment;
-import com.facebook.react.modules.dialog.DialogModule;
 
 import javax.annotation.Nullable;
 
@@ -64,13 +63,39 @@ public class RNPromptFragment extends DialogFragment implements DialogInterface.
         AlertDialog.Builder builder = new AlertDialog.Builder(activityContext)
                 .setTitle(arguments.getString(ARG_TITLE));
 
+        if (arguments.containsKey(ARG_BUTTON_POSITIVE)) {
+            builder.setPositiveButton(arguments.getString(ARG_BUTTON_POSITIVE), fragment);
+        }
+        if (arguments.containsKey(ARG_BUTTON_NEGATIVE)) {
+            builder.setNegativeButton(arguments.getString(ARG_BUTTON_NEGATIVE), fragment);
+        }
+        if (arguments.containsKey(ARG_BUTTON_NEUTRAL)) {
+            builder.setNeutralButton(arguments.getString(ARG_BUTTON_NEUTRAL), fragment);
+        }
+        // if both message and items are set, Android will only show the message
+        // and ignore the items argument entirely
+        if (arguments.containsKey(ARG_MESSAGE)) {
+            builder.setMessage(arguments.getString(ARG_MESSAGE));
+        }
+
+        if (arguments.containsKey(ARG_ITEMS)) {
+            builder.setItems(arguments.getCharSequenceArray(ARG_ITEMS), fragment);
+        }
+
+        AlertDialog alertDialog = builder.create();
+
         // Set up the input
         final EditText input = new EditText(activityContext);
 
         int type = InputType.TYPE_CLASS_TEXT;
+        String typeString = arguments.getString(ARG_TYPE);
+
+        if (typeString == null) {
+            typeString = "plain-text";
+        }
 
         if (arguments.containsKey(ARG_TYPE)) {
-            switch (arguments.getString(ARG_TYPE)) {
+            switch (typeString) {
                 case "secure-text":
                     type = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
                     break;
@@ -95,27 +120,16 @@ public class RNPromptFragment extends DialogFragment implements DialogInterface.
         if (arguments.containsKey(ARG_PLACEHOLDER)) {
             input.setHint(arguments.getString(ARG_PLACEHOLDER));
         }
-        builder.setView(input);
 
-        if (arguments.containsKey(ARG_BUTTON_POSITIVE)) {
-            builder.setPositiveButton(arguments.getString(ARG_BUTTON_POSITIVE), fragment);
-        }
-        if (arguments.containsKey(ARG_BUTTON_NEGATIVE)) {
-            builder.setNegativeButton(arguments.getString(ARG_BUTTON_NEGATIVE), fragment);
-        }
-        if (arguments.containsKey(ARG_BUTTON_NEUTRAL)) {
-            builder.setNeutralButton(arguments.getString(ARG_BUTTON_NEUTRAL), fragment);
-        }
-        // if both message and items are set, Android will only show the message
-        // and ignore the items argument entirely
-        if (arguments.containsKey(ARG_MESSAGE)) {
-            builder.setMessage(arguments.getString(ARG_MESSAGE));
-        }
-        if (arguments.containsKey(ARG_ITEMS)) {
-            builder.setItems(arguments.getCharSequenceArray(ARG_ITEMS), fragment);
-        }
+        // set input style
+        ShapeDrawable shape = new ShapeDrawable(new RectShape());
+        shape.getPaint().setColor(activityContext.getResources().getColor(android.R.color.holo_blue_light));
+        shape.getPaint().setStyle(Paint.Style.STROKE);
+        shape.getPaint().setStrokeWidth(3);
+        input.setBackground(shape);
+        alertDialog.setView(input, 10, 15, 10, 0);
 
-        return builder.create();
+        return alertDialog;
     }
 
     public void setTextInput(EditText input) {
