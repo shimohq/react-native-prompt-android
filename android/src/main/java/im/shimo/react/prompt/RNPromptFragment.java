@@ -1,6 +1,7 @@
 package im.shimo.react.prompt;
 
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -52,6 +53,7 @@ public class RNPromptFragment extends DialogFragment implements DialogInterface.
         mListener = null;
     }
 
+    @SuppressLint("ValidFragment")
     public RNPromptFragment(@Nullable RNPromptModule.PromptFragmentListener listener, Bundle arguments) {
         mListener = listener;
         setArguments(arguments);
@@ -97,11 +99,11 @@ public class RNPromptFragment extends DialogFragment implements DialogInterface.
         if (arguments.containsKey(ARG_TYPE)) {
             switch (typeString) {
                 case "secure-text":
-                    type = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
+                    type = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS;
                     break;
                 case "plain-text":
                 default:
-                    type = InputType.TYPE_CLASS_TEXT;
+                    type = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS;
             }
         }
 
