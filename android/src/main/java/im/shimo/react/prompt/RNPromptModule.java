@@ -26,7 +26,7 @@ import javax.annotation.Nullable;
 public class RNPromptModule extends ReactContextBaseJavaModule implements LifecycleEventListener {
 
     /* package */ static final String FRAGMENT_TAG =
-            "im.shimo.react.prompt.RNPromptModule";
+        "im.shimo.react.prompt.RNPromptModule";
 
     /* package */ static final String NAME = "PromptAndroid";
 
@@ -44,11 +44,11 @@ public class RNPromptModule extends ReactContextBaseJavaModule implements Lifecy
     /* package */ static final String KEY_PLACEHOLDER = "placeholder";
 
     /* package */ static final Map<String, Object> CONSTANTS = MapBuilder.<String, Object>of(
-            ACTION_BUTTON_CLICKED, ACTION_BUTTON_CLICKED,
-            ACTION_DISMISSED, ACTION_DISMISSED,
-            KEY_BUTTON_POSITIVE, DialogInterface.BUTTON_POSITIVE,
-            KEY_BUTTON_NEGATIVE, DialogInterface.BUTTON_NEGATIVE,
-            KEY_BUTTON_NEUTRAL, DialogInterface.BUTTON_NEUTRAL);
+        ACTION_BUTTON_CLICKED, ACTION_BUTTON_CLICKED,
+        ACTION_DISMISSED, ACTION_DISMISSED,
+        KEY_BUTTON_POSITIVE, DialogInterface.BUTTON_POSITIVE,
+        KEY_BUTTON_NEGATIVE, DialogInterface.BUTTON_NEGATIVE,
+        KEY_BUTTON_NEUTRAL, DialogInterface.BUTTON_NEUTRAL);
 
     private boolean mIsInForeground;
 
@@ -119,7 +119,7 @@ public class RNPromptModule extends ReactContextBaseJavaModule implements Lifecy
         if (options.hasKey(KEY_ITEMS)) {
             ReadableArray items = options.getArray(KEY_ITEMS);
             CharSequence[] itemsArray = new CharSequence[items.size()];
-            for (int i = 0; i < items.size(); i ++) {
+            for (int i = 0; i < items.size(); i++) {
                 itemsArray[i] = items.getString(i);
             }
             args.putCharSequenceArray(RNPromptFragment.ARG_ITEMS, itemsArray);
@@ -144,10 +144,13 @@ public class RNPromptModule extends ReactContextBaseJavaModule implements Lifecy
     private class FragmentManagerHelper {
 
         // Exactly one of the two is null
-        private final @Nullable
+        private final
+        @Nullable
         android.app.FragmentManager mFragmentManager;
 
-        private @Nullable RNPromptFragment mFragmentToShow;
+        private
+        @Nullable
+        RNPromptFragment mFragmentToShow;
 
 
         public FragmentManagerHelper(android.app.FragmentManager fragmentManager) {
@@ -165,7 +168,7 @@ public class RNPromptModule extends ReactContextBaseJavaModule implements Lifecy
         private void dismissExisting() {
             if (mFragmentManager != null) {
                 RNPromptFragment oldFragment =
-                        (RNPromptFragment) mFragmentManager.findFragmentByTag(FRAGMENT_TAG);
+                    (RNPromptFragment) mFragmentManager.findFragmentByTag(FRAGMENT_TAG);
                 if (oldFragment != null) {
                     oldFragment.dismiss();
                 }
@@ -176,7 +179,7 @@ public class RNPromptModule extends ReactContextBaseJavaModule implements Lifecy
             dismissExisting();
 
             PromptFragmentListener actionListener =
-                    actionCallback != null ? new PromptFragmentListener(actionCallback) : null;
+                actionCallback != null ? new PromptFragmentListener(actionCallback) : null;
 
             RNPromptFragment promptFragment = new RNPromptFragment(actionListener, arguments);
             if (isInForeground) {
@@ -229,7 +232,9 @@ public class RNPromptModule extends ReactContextBaseJavaModule implements Lifecy
         return CONSTANTS;
     }
 
-    private @Nullable FragmentManagerHelper getFragmentManagerHelper() {
+    private
+    @Nullable
+    FragmentManagerHelper getFragmentManagerHelper() {
         Activity activity = getCurrentActivity();
         if (activity == null) {
             return null;
