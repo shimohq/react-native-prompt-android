@@ -1,15 +1,11 @@
 package im.shimo.react.prompt;
 
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Paint;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.RectShape;
 import android.os.Bundle;
 import android.text.InputType;
 import android.widget.EditText;
@@ -47,23 +43,23 @@ public class RNPromptFragment extends DialogFragment implements DialogInterface.
         }
     }
 
-    private final @Nullable RNPromptModule.PromptFragmentListener mListener;
+    private final
+    @Nullable
+    RNPromptModule.PromptFragmentListener mListener;
 
     public RNPromptFragment() {
         mListener = null;
     }
 
-    @SuppressLint("ValidFragment")
     public RNPromptFragment(@Nullable RNPromptModule.PromptFragmentListener listener, Bundle arguments) {
         mListener = listener;
         setArguments(arguments);
     }
 
-
     public static Dialog createDialog(
-            Context activityContext, Bundle arguments, RNPromptFragment fragment) {
+        Context activityContext, Bundle arguments, RNPromptFragment fragment) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activityContext)
-                .setTitle(arguments.getString(ARG_TITLE));
+            .setTitle(arguments.getString(ARG_TITLE));
 
         if (arguments.containsKey(ARG_BUTTON_POSITIVE)) {
             builder.setPositiveButton(arguments.getString(ARG_BUTTON_POSITIVE), fragment);
@@ -89,21 +85,18 @@ public class RNPromptFragment extends DialogFragment implements DialogInterface.
         // Set up the input
         final EditText input = new EditText(activityContext);
 
-        int type = InputType.TYPE_CLASS_TEXT;
-        String typeString = arguments.getString(ARG_TYPE);
-
-        if (typeString == null) {
-            typeString = "plain-text";
-        }
-
+        int type = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS;
         if (arguments.containsKey(ARG_TYPE)) {
-            switch (typeString) {
-                case "secure-text":
-                    type = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS;
-                    break;
-                case "plain-text":
-                default:
-                    type = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS;
+            String typeString = arguments.getString(ARG_TYPE);
+            if (typeString != null) {
+                switch (typeString) {
+                    case "secure-text":
+                        type = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
+                        break;
+                    case "plain-text":
+                    default:
+                        type = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS;
+                }
             }
         }
 
@@ -123,13 +116,7 @@ public class RNPromptFragment extends DialogFragment implements DialogInterface.
             input.setHint(arguments.getString(ARG_PLACEHOLDER));
         }
 
-        // set input style
-        ShapeDrawable shape = new ShapeDrawable(new RectShape());
-        shape.getPaint().setColor(activityContext.getResources().getColor(android.R.color.holo_blue_light));
-        shape.getPaint().setStyle(Paint.Style.STROKE);
-        shape.getPaint().setStrokeWidth(3);
-        input.setBackground(shape);
-        alertDialog.setView(input, 10, 15, 10, 0);
+        alertDialog.setView(input, 70, 15, 70, 0);
 
         return alertDialog;
     }
