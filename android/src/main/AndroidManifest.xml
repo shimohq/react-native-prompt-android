@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="im.shimo.react.prompt">
+    android:theme="@style/ShimoAlertDialogStyle">
 
 </manifest>
