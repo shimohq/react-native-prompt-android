@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ShimoAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/prompt_color</item>
+    </style>
+
+    <style name="ShimoEditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="colorControlNormal">@color/prompt_color</item>
+        <item name="colorControlActivated">@color/prompt_color</item>
+        <item name="colorControlHighlight">@color/prompt_color</item>
+    </style>
+</resources>

@@ -18,11 +18,23 @@ export type PromptType = $Enum<{
         'secure-text': string,
 }>;
 
+export type PromptStyle = $Enum<{
+    /**
+     * Default alert dialog style
+     */
+    'default': string,
+    /**
+     * Shimo alert dialog style
+     */
+    'shimo': string,
+}>;
+
 type Options = {
     cancelable?: ?boolean;
     type?: ?PromptType;
     defaultValue?: ?String;
     placeholder?: ?String;
+    style?: ?PromptStyle;
 };
 
 /**
@@ -66,6 +78,7 @@ export default function prompt(
             ...config,
             cancelable: options.cancelable !== false,
             type: options.type || 'defalt',
+            style: options.style || 'defalt',
             defaultValue: options.defaultValue || '',
             placeholder: options.placeholder || ''
         };
