@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Platform } from 'react-native';
+
 import {
     AppRegistry,
     StyleSheet,
@@ -18,23 +20,45 @@ export default class PromptAndroid extends Component {
     };
 
     _prompt() {
-        prompt(
-            'Enter password',
-            'Enter your password to claim your $1.5B in lottery winnings',
-            [
-                {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-                {text: 'OK', onPress: password => {
-                    this.setState({ password });
-                    console.log('OK Pressed, password: ' + password);
-                }},
-            ],
-            {
-                type: 'secure-text',
-                cancelable: false,
-                defaultValue: 'test',
-                placeholder: 'placeholder'
-            }
-        );
+        if (Platform.OS === 'android') {
+            prompt(
+                'Enter password',
+                'Enter your password to claim your $1.5B in lottery winnings',
+                [
+                    {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                    {text: 'OK', onPress: password => {
+                        this.setState({ password });
+                        console.log('OK Pressed, password: ' + password);
+                    }},
+                ],
+                {
+                    type: 'secure-text',
+                    cancelable: false,
+                    defaultValue: 'test',
+                    placeholder: 'placeholder',
+                    style: 'shimo'
+                }
+            );
+        } else {
+            prompt(
+                'Enter password',
+                'Enter your password to claim your $1.5B in lottery winnings',
+                [
+                    {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                    {text: 'OK', onPress: password => {
+                        this.setState({ password });
+                        console.log('OK Pressed, password: ' + password);
+                    }},
+                ],
+                {
+                    type: 'secure-text',
+                    cancelable: false,
+                    defaultValue: 'test',
+                    placeholder: 'placeholder'
+                }
+            );
+        }
+
     };
 
     render() {

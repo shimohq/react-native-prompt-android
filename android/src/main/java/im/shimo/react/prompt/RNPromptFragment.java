@@ -1,14 +1,16 @@
 package im.shimo.react.prompt;
 
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.text.InputType;
+import android.view.LayoutInflater;
 import android.widget.EditText;
+
 
 import javax.annotation.Nullable;
 
@@ -21,6 +23,7 @@ public class RNPromptFragment extends DialogFragment implements DialogInterface.
     /* package */ static final String ARG_BUTTON_NEUTRAL = "button_neutral";
     /* package */ static final String ARG_ITEMS = "items";
     /* package */ static final String ARG_TYPE = "type";
+    /* package */ static final String ARG_STYLE = "style";
     /* package */ static final String ARG_DEFAULT_VALUE = "defaultValue";
     /* package */ static final String ARG_PLACEHOLDER = "placeholder";
 
@@ -58,8 +61,21 @@ public class RNPromptFragment extends DialogFragment implements DialogInterface.
 
     public static Dialog createDialog(
         Context activityContext, Bundle arguments, RNPromptFragment fragment) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(activityContext)
-            .setTitle(arguments.getString(ARG_TITLE));
+
+        AlertDialog.Builder builder;
+        String style = arguments.containsKey(ARG_STYLE) ? arguments.getString(ARG_STYLE) : "default";
+        style = style != null ? style : "default";
+
+        // AlertDialog style
+        switch (style) {
+            case "shimo":
+                builder = new AlertDialog.Builder(activityContext, R.style.ShimoAlertDialogStyle);
+                break;
+            default:
+                builder = new AlertDialog.Builder(activityContext);
+        }
+
+        builder.setTitle(arguments.getString(ARG_TITLE));
 
         if (arguments.containsKey(ARG_BUTTON_POSITIVE)) {
             builder.setPositiveButton(arguments.getString(ARG_BUTTON_POSITIVE), fragment);
@@ -82,9 +98,18 @@ public class RNPromptFragment extends DialogFragment implements DialogInterface.
 
         AlertDialog alertDialog = builder.create();
 
-        // Set up the input
-        final EditText input = new EditText(activityContext);
+        // input style
+        LayoutInflater inflater = LayoutInflater.from(activityContext);
+        final EditText input;
+        switch (style) {
+            case "shimo":
+                input = (EditText) inflater.inflate(R.layout.edit_text, null);
+                break;
+            default:
+                input = new EditText(activityContext);
+        }
 
+        // input type
         int type = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS;
         if (arguments.containsKey(ARG_TYPE)) {
             String typeString = arguments.getString(ARG_TYPE);
@@ -99,8 +124,8 @@ public class RNPromptFragment extends DialogFragment implements DialogInterface.
                 }
             }
         }
-
         input.setInputType(type);
+
         fragment.setTextInput(input);
 
         if (arguments.containsKey(ARG_DEFAULT_VALUE)) {
