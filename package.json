@@ -1,56 +1,26 @@
 {
-  "_from": "react-native-prompt-android@^0.0.5",
-  "_id": "react-native-prompt-android@0.0.5",
-  "_inBundle": false,
-  "_integrity": "sha1-38X9IGjaO4lNm9T+WQgud10UESI=",
-  "_location": "/react-native-prompt-android",
-  "_phantomChildren": {},
-  "_requested": {
-    "type": "range",
-    "registry": true,
-    "raw": "react-native-prompt-android@^0.0.5",
     "name": "react-native-prompt-android",
-    "escapedName": "react-native-prompt-android",
-    "rawSpec": "^0.0.5",
-    "saveSpec": null,
-    "fetchSpec": "^0.0.5"
-  },
-  "_requiredBy": [
-    "#USER",
-    "/"
-  ],
-  "_resolved": "http://r.cnpmjs.org/react-native-prompt-android/download/react-native-prompt-android-0.0.5.tgz",
-  "_shasum": "dfc5fd2068da3b894d9bd4fe59082e775d141122",
-  "_spec": "react-native-prompt-android@^0.0.5",
-  "_where": "/Users/bell/github/bell/react-native-prompt-android/Example",
-  "bugs": {
-    "url": "https://github.com/shimohq/react-native-prompt-android/issues"
-  },
-  "bundleDependencies": false,
-  "deprecated": false,
-  "description": "Polyfill for Alert.prompt on Android",
-  "devDependencies": {
-    "babel-eslint": "^6.1.2",
-    "eslint": "^2.13.1",
-    "eslint-plugin-react": "^4.3.0"
-  },
-  "homepage": "https://github.com/shimohq/react-native-prompt-android#readme",
-  "keywords": [
-    "react-component",
-    "react-native",
-    "prompt",
-    "Alert",
-    "ios",
-    "android"
-  ],
-  "license": "MIT",
-  "name": "react-native-prompt-android",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/shimohq/react-native-prompt-android.git"
-  },
-  "scripts": {
-    "lint": "eslint ./"
-  },
-  "version": "0.0.5"
+    "version": "0.0.6",
+    "description": "Polyfill for Alert.prompt on Android",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/shimohq/react-native-prompt-android"
+    },
+    "license": "MIT",
+    "keywords": [
+        "react-component",
+        "react-native",
+        "prompt",
+        "Alert",
+        "ios",
+        "android"
+    ],
+    "scripts": {
+        "lint": "eslint ./"
+    },
+    "devDependencies": {
+        "babel-eslint": "^6.1.2",
+        "eslint": "^2.13.1",
+        "eslint-plugin-react": "^4.3.0"
+    }
 }
