@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
 import android.view.LayoutInflater;
+import android.view.WindowManager;
 import android.widget.EditText;
 
 
@@ -59,9 +60,7 @@ public class RNPromptFragment extends DialogFragment implements DialogInterface.
         setArguments(arguments);
     }
 
-    public static Dialog createDialog(
-        Context activityContext, Bundle arguments, RNPromptFragment fragment) {
-
+    public Dialog createDialog(Context activityContext, Bundle arguments) {
         AlertDialog.Builder builder;
         String style = arguments.containsKey(ARG_STYLE) ? arguments.getString(ARG_STYLE) : "default";
         style = style != null ? style : "default";
@@ -78,13 +77,13 @@ public class RNPromptFragment extends DialogFragment implements DialogInterface.
         builder.setTitle(arguments.getString(ARG_TITLE));
 
         if (arguments.containsKey(ARG_BUTTON_POSITIVE)) {
-            builder.setPositiveButton(arguments.getString(ARG_BUTTON_POSITIVE), fragment);
+            builder.setPositiveButton(arguments.getString(ARG_BUTTON_POSITIVE), this);
         }
         if (arguments.containsKey(ARG_BUTTON_NEGATIVE)) {
-            builder.setNegativeButton(arguments.getString(ARG_BUTTON_NEGATIVE), fragment);
+            builder.setNegativeButton(arguments.getString(ARG_BUTTON_NEGATIVE), this);
         }
         if (arguments.containsKey(ARG_BUTTON_NEUTRAL)) {
-            builder.setNeutralButton(arguments.getString(ARG_BUTTON_NEUTRAL), fragment);
+            builder.setNeutralButton(arguments.getString(ARG_BUTTON_NEUTRAL), this);
         }
         // if both message and items are set, Android will only show the message
         // and ignore the items argument entirely
@@ -93,7 +92,7 @@ public class RNPromptFragment extends DialogFragment implements DialogInterface.
         }
 
         if (arguments.containsKey(ARG_ITEMS)) {
-            builder.setItems(arguments.getCharSequenceArray(ARG_ITEMS), fragment);
+            builder.setItems(arguments.getCharSequenceArray(ARG_ITEMS), this);
         }
 
         AlertDialog alertDialog = builder.create();
@@ -126,8 +125,6 @@ public class RNPromptFragment extends DialogFragment implements DialogInterface.
         }
         input.setInputType(type);
 
-        fragment.setTextInput(input);
-
         if (arguments.containsKey(ARG_DEFAULT_VALUE)) {
             String defaultValue = arguments.getString(ARG_DEFAULT_VALUE);
             if (defaultValue != null) {
@@ -140,19 +137,17 @@ public class RNPromptFragment extends DialogFragment implements DialogInterface.
         if (arguments.containsKey(ARG_PLACEHOLDER)) {
             input.setHint(arguments.getString(ARG_PLACEHOLDER));
         }
-
         alertDialog.setView(input, 50, 15, 50, 0);
 
-        return alertDialog;
-    }
-
-    public void setTextInput(EditText input) {
         mInputText = input;
+        return alertDialog;
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        return createDialog(getActivity(), getArguments(), this);
+        Dialog dialog = this.createDialog(getActivity(), getArguments());
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        return dialog;
     }
 
     @Override
