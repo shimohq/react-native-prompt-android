@@ -42,6 +42,17 @@ prompt(
 );
 ```
 
+## Props
+
+ name                 | description                                 | type     | default
+:-------------------- |:------------------------------------------- | --------:|:------------------
+ type                 | Text input type: `'numeric', 'secure-text', 'phone-pad', 'email-address'`  |   String | 'default'
+ cancelable           |                                             |  Boolean |
+ defaultValue         | Default input value                         |   String | ''
+ placeholder          |                                             |   String | ''
+
+
+
 ![Android Screen Shoot](./Example/android.png)
 
 ![Android Screen Shoot](./Example/ios.png)

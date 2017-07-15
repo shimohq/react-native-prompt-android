@@ -86,11 +86,12 @@ export default function prompt(
     }
 
     if (options) {
+        console.log(options.cancelable !== false);
         config = {
             ...config,
             cancelable: options.cancelable !== false,
-            type: options.type || 'defalt',
-            style: options.style || 'defalt',
+            type: options.type || 'default',
+            style: options.style || 'default',
             defaultValue: options.defaultValue || '',
             placeholder: options.placeholder || ''
         };
