@@ -93,6 +93,14 @@ export default class PromptAndroid extends Component {
           defaultValue: '20',
         };
 
+        const phone = {
+          name: 'phone',
+          title: 'Enter phone',
+          description: 'Enter your phone',
+          type: 'phone-pad',
+          defaultValue: '16051233223',
+        };
+
         return (
             <View style={styles.container}>
               <View style={styles.buttonContainer}>
@@ -121,6 +129,20 @@ export default class PromptAndroid extends Component {
                 </TouchableHighlight>
                 <Text style={styles.title}>Your age</Text>
                 <Text style={styles.input}>{this.state.age}</Text>
+              </View>
+
+              <View style={styles.buttonContainer}>
+                <TouchableHighlight
+                    style={styles.button}
+                    onPress={() => this._prompt(phone)}
+                    underlayColor="#ccc"
+                >
+                    <View style={styles.buttonContent}>
+                        <Text style={styles.buttonText}>SET PHONE</Text>
+                    </View>
+                </TouchableHighlight>
+                <Text style={styles.title}>Your phone</Text>
+                <Text style={styles.input}>{this.state.phone}</Text>
               </View>
             </View>
         );
