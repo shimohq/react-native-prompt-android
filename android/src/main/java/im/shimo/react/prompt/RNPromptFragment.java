@@ -33,7 +33,10 @@ public class RNPromptFragment extends DialogFragment implements DialogInterface.
     public enum PromptTypes {
         TYPE_DEFAULT("default"),
         PLAIN_TEXT("plain-text"),
-        SECURE_TEXT("secure-text");
+        SECURE_TEXT("secure-text"),
+        NUMERIC("numeric"),
+        EMAIL_ADDRESS("email-address"),
+        PHONE_PAD("phone-pad");
 
         private final String mName;
 
@@ -116,6 +119,15 @@ public class RNPromptFragment extends DialogFragment implements DialogInterface.
                 switch (typeString) {
                     case "secure-text":
                         type = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
+                        break;
+                    case "numeric":
+                        type = InputType.TYPE_CLASS_TEXT | InputType.TYPE_CLASS_NUMBER;
+                        break;
+                    case "email-address":
+                        type = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS;
+                        break;
+                    case "phone-pad":
+                        type = InputType.TYPE_CLASS_TEXT | InputType.TYPE_CLASS_PHONE;
                         break;
                     case "plain-text":
                     default:

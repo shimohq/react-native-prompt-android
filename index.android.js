@@ -16,6 +16,18 @@ export type PromptType = $Enum<{
      * Secure text input alert
      */
         'secure-text': string,
+    /**
+     * Numeric input alert
+     */
+        'numeric': string,
+    /**
+     * Email address input alert
+     */
+        'email-address': string,
+    /**
+     * Phone pad input alert
+     */
+        'phone-pad': string,
 }>;
 
 export type PromptStyle = $Enum<{
