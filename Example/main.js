@@ -17,6 +17,8 @@ export default class PromptAndroid extends Component {
         this.state = {
             password: '',
             age: '',
+            phone: '',
+            email: '',
         };
     }
 
@@ -101,6 +103,14 @@ export default class PromptAndroid extends Component {
           defaultValue: '16051233223',
         };
 
+        const email = {
+          name: 'email',
+          title: 'Enter email',
+          description: 'Enter your email',
+          type: 'email-address',
+          defaultValue: 'test@test.com',
+        };
+
         return (
             <View style={styles.container}>
               <View style={styles.buttonContainer}>
@@ -143,6 +153,20 @@ export default class PromptAndroid extends Component {
                 </TouchableHighlight>
                 <Text style={styles.title}>Your phone</Text>
                 <Text style={styles.input}>{this.state.phone}</Text>
+              </View>
+
+              <View style={styles.buttonContainer}>
+                <TouchableHighlight
+                    style={styles.button}
+                    onPress={() => this._prompt(email)}
+                    underlayColor="#ccc"
+                >
+                    <View style={styles.buttonContent}>
+                        <Text style={styles.buttonText}>SET EMAIL</Text>
+                    </View>
+                </TouchableHighlight>
+                <Text style={styles.title}>Your email</Text>
+                <Text style={styles.input}>{this.state.email}</Text>
               </View>
             </View>
         );
