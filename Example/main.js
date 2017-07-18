@@ -15,58 +15,108 @@ export default class PromptAndroid extends Component {
     constructor() {
         super(...arguments);
         this.state = {
-            password: ''
+            password: '',
+            age: '',
+            phone: '',
+            email: '',
         };
-    };
+    }
 
-    _prompt() {
+    _prompt = (params) => {
+      console.log(params);
         if (Platform.OS === 'android') {
             prompt(
-                'Enter password',
-                'Enter your password to claim your $1.5B in lottery winnings',
+                params.title,
+                params.description,
                 [
-                    {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-                    {text: 'OK', onPress: password => {
-                        this.setState({ password });
-                        console.log('OK Pressed, password: ' + password);
-                    }},
+                    {
+                      text: 'Cancel',
+                      onPress: () => console.log('Cancel Pressed'),
+                      style: 'cancel'
+                    },
+                    {
+                      text: 'OK', onPress: value =>
+                      {
+                        this.setState({ [params.name]: value });
+                        console.log(`OK Pressed, ${params.name}: ${value}`);
+                      }
+                    },
                 ],
                 {
-                    type: 'secure-text',
+                    type: params.type,
                     cancelable: false,
-                    defaultValue: 'test',
+                    defaultValue: params.defaultValue,
                     placeholder: 'placeholder',
                     style: 'shimo'
                 }
             );
         } else {
             prompt(
-                'Enter password',
-                'Enter your password to claim your $1.5B in lottery winnings',
+                params.title,
+                params.description,
                 [
-                    {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-                    {text: 'OK', onPress: password => {
-                        this.setState({ password });
-                        console.log('OK Pressed, password: ' + password);
-                    }},
+                    {
+                      text: 'Cancel', onPress: () => console.log('Cancel Pressed'),
+                      style: 'cancel'
+                    },
+                    {
+                      text: 'OK', onPress: value =>
+                      {
+                        this.setState({ [params.name]: value });
+                        console.log(`OK Pressed, ${params.name}: ${value}`);
+                      }
+                    },
                 ],
                 {
-                    type: 'secure-text',
+                    type: params.type,
                     cancelable: false,
-                    defaultValue: 'test',
+                    defaultValue: params.defaultValue,
                     placeholder: 'placeholder'
                 }
             );
         }
-
     };
 
     render() {
+
+        const password = {
+          name: 'password',
+          title: 'Enter password',
+          description: 'Enter your password to claim your $1.5B in lottery winnings',
+          type: 'secure-text',
+          defaultValue: 'test',
+        };
+
+        const age = {
+          name: 'age',
+          title: 'Enter age',
+          description: 'Enter your age',
+          type: 'numeric',
+          defaultValue: '20',
+        };
+
+        const phone = {
+          name: 'phone',
+          title: 'Enter phone',
+          description: 'Enter your phone',
+          type: 'phone-pad',
+          defaultValue: '16051233223',
+        };
+
+        const email = {
+          name: 'email',
+          title: 'Enter email',
+          description: 'Enter your email',
+          type: 'email-address',
+          defaultValue: 'test@test.com',
+        };
+
         return (
             <View style={styles.container}>
+              <View style={styles.buttonContainer}>
                 <TouchableHighlight
                     style={styles.button}
-                    onPress={this._prompt.bind(this)}
+                    onPress={() => this._prompt(password)}
                     underlayColor="#ccc"
                 >
                     <View style={styles.buttonContent}>
@@ -75,6 +125,49 @@ export default class PromptAndroid extends Component {
                 </TouchableHighlight>
                 <Text style={styles.title}>Your password</Text>
                 <Text style={styles.input}>{this.state.password}</Text>
+              </View>
+
+              <View style={styles.buttonContainer}>
+                <TouchableHighlight
+                    style={styles.button}
+                    onPress={() => this._prompt(age)}
+                    underlayColor="#ccc"
+                >
+                    <View style={styles.buttonContent}>
+                        <Text style={styles.buttonText}>SET AGE</Text>
+                    </View>
+                </TouchableHighlight>
+                <Text style={styles.title}>Your age</Text>
+                <Text style={styles.input}>{this.state.age}</Text>
+              </View>
+
+              <View style={styles.buttonContainer}>
+                <TouchableHighlight
+                    style={styles.button}
+                    onPress={() => this._prompt(phone)}
+                    underlayColor="#ccc"
+                >
+                    <View style={styles.buttonContent}>
+                        <Text style={styles.buttonText}>SET PHONE</Text>
+                    </View>
+                </TouchableHighlight>
+                <Text style={styles.title}>Your phone</Text>
+                <Text style={styles.input}>{this.state.phone}</Text>
+              </View>
+
+              <View style={styles.buttonContainer}>
+                <TouchableHighlight
+                    style={styles.button}
+                    onPress={() => this._prompt(email)}
+                    underlayColor="#ccc"
+                >
+                    <View style={styles.buttonContent}>
+                        <Text style={styles.buttonText}>SET EMAIL</Text>
+                    </View>
+                </TouchableHighlight>
+                <Text style={styles.title}>Your email</Text>
+                <Text style={styles.input}>{this.state.email}</Text>
+              </View>
             </View>
         );
     }
@@ -86,6 +179,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#F5FCFF',
+    },
+    buttonContainer: {
+        marginBottom: 10,
     },
     button: {
         borderRadius: 5,
@@ -112,7 +208,7 @@ const styles = StyleSheet.create({
     },
     input: {
         paddingHorizontal: 5,
-        borderBottomWidth: StyleSheet.hairlineWidth
+        marginBottom: 10
     }
 });
 

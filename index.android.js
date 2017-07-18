@@ -16,6 +16,18 @@ export type PromptType = $Enum<{
      * Secure text input alert
      */
         'secure-text': string,
+    /**
+     * Numeric input alert
+     */
+        'numeric': string,
+    /**
+     * Email address input alert
+     */
+        'email-address': string,
+    /**
+     * Phone pad input alert
+     */
+        'phone-pad': string,
 }>;
 
 export type PromptStyle = $Enum<{
@@ -74,11 +86,12 @@ export default function prompt(
     }
 
     if (options) {
+        console.log(options.cancelable !== false);
         config = {
             ...config,
             cancelable: options.cancelable !== false,
-            type: options.type || 'defalt',
-            style: options.style || 'defalt',
+            type: options.type || 'default',
+            style: options.style || 'default',
             defaultValue: options.defaultValue || '',
             placeholder: options.placeholder || ''
         };
