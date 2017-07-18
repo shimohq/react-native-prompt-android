@@ -86,7 +86,6 @@ export default function prompt(
     }
 
     if (options) {
-        console.log(options.cancelable !== false);
         config = {
             ...config,
             cancelable: options.cancelable !== false,
