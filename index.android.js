@@ -72,18 +72,25 @@ export default function prompt(
     callbackOrButtons?: ?((text: string) => void) | ButtonsArray,
     options?: Options
 ): void {
-    let buttons = callbackOrButtons;
+    const defaultButtons = [
+      {
+        text: 'Cancel',
+        onPress: () => {}
+      },
+      {
+        text: 'OK',
+        onPress: callbackOrButtons
+      }
+    ];
+
+    let buttons = typeof callbackOrButtons === 'function'
+      ? defaultButtons
+      : callbackOrButtons;
+      
     let config = {
         title: title || '',
         message: message || '',
     };
-
-    if (typeof callbackOrButtons === 'function') {
-        buttons.push({
-            text: 'OK',
-            onPress: callbackOrButtons
-        });
-    }
 
     if (options) {
         config = {
