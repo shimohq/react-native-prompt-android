@@ -75,7 +75,6 @@ export default function prompt(
     const defaultButtons = [
       {
         text: 'Cancel',
-        onPress: () => {}
       },
       {
         text: 'OK',
