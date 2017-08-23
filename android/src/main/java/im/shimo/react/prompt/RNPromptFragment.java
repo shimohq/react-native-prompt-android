@@ -1,6 +1,5 @@
 package im.shimo.react.prompt;
 
-
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
@@ -11,7 +10,6 @@ import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.WindowManager;
 import android.widget.EditText;
-
 
 import javax.annotation.Nullable;
 
@@ -50,7 +48,7 @@ public class RNPromptFragment extends DialogFragment implements DialogInterface.
         }
     }
 
-    private final
+    private
     @Nullable
     RNPromptModule.PromptFragmentListener mListener;
 
@@ -58,9 +56,8 @@ public class RNPromptFragment extends DialogFragment implements DialogInterface.
         mListener = null;
     }
 
-    public RNPromptFragment(@Nullable RNPromptModule.PromptFragmentListener listener, Bundle arguments) {
+    public void setListener(@Nullable RNPromptModule.PromptFragmentListener listener) {
         mListener = listener;
-        setArguments(arguments);
     }
 
     public Dialog createDialog(Context activityContext, Bundle arguments) {
