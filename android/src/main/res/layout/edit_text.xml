@@ -4,5 +4,5 @@
           android:layout_height="match_parent"
           android:textCursorDrawable="@drawable/edit_text_cursor"
           style="@style/ShimoEditTextStyle"
-          android:imeOptions="flagNoExtractUi|actionDone"
+          android:imeOptions="actionDone"
           android:theme="@style/ShimoEditTextStyle"/>
