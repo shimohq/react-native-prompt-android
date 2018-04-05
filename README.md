@@ -49,6 +49,7 @@ prompt(
  type                 | Text input type: `'numeric', 'secure-text', 'phone-pad', 'email-address'`  |   String | 'default'
  cancelable           |                                             |  Boolean |
  defaultValue         | Default input value                         |   String | ''
+ keyboardType         | The keyboard type of first text field(if exists). One of `'default'`, `'email-address'`, `'numeric'`, `'phone-pad'`, `'ascii-capable'`, `'numbers-and-punctuation'`, `'url'`, `'number-pad'`, `'name-phone-pad'`, `'decimal-pad'`, `'twitter'` or `'web-search'`. | String | 'default'
  placeholder          |                                             |   String | ''
 
 
