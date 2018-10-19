@@ -8,5 +8,5 @@ export default function prompt(
     callbackOrButtons?: ?((text: string) => void) | Object,
     options?: Object
 ): void {
-    AlertIOS.prompt(title, message, callbackOrButtons, options.type, options.defaultValue);
+    AlertIOS.prompt(title, message, callbackOrButtons, options.type, options.defaultValue, options.keyboardType);
 };
