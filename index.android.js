@@ -3,75 +3,7 @@ import {
 } from 'react-native';
 const PromptAndroid = NativeModules.PromptAndroid;
 
-export type PromptType = $Enum<{
-    /**
-     * Default alert with no inputs
-     */
-        'default': string,
-    /**
-     * Plain text input alert
-     */
-        'plain-text': string,
-    /**
-     * Secure text input alert
-     */
-        'secure-text': string,
-    /**
-     * Numeric input alert
-     */
-        'numeric': string,
-    /**
-     * Email address input alert
-     */
-        'email-address': string,
-    /**
-     * Phone pad input alert
-     */
-        'phone-pad': string,
-}>;
-
-export type PromptStyle = $Enum<{
-    /**
-     * Default alert dialog style
-     */
-    'default': string,
-    /**
-     * Shimo alert dialog style
-     */
-    'shimo': string,
-}>;
-
-type Options = {
-    cancelable?: ?boolean;
-    type?: ?PromptType;
-    defaultValue?: ?String;
-    placeholder?: ?String;
-    style?: ?PromptStyle;
-};
-
-/**
- * Array or buttons
- * @typedef {Array} ButtonsArray
- * @property {string=} text Button label
- * @property {Function=} onPress Callback function when button pressed
- */
-type ButtonsArray = Array<{
-    /**
-     * Button label
-     */
-        text?: string,
-    /**
-     * Callback function when button pressed
-     */
-        onPress?: ?Function,
-}>;
-
-export default function prompt(
-    title: ?string,
-    message?: ?string,
-    callbackOrButtons?: ?((text: string) => void) | ButtonsArray,
-    options?: Options
-): void {
+export default function prompt(title, message, callbackOrButtons, options) {
     const defaultButtons = [
       {
         text: 'Cancel',
@@ -103,7 +35,7 @@ export default function prompt(
     }
     // At most three buttons (neutral, negative, positive). Ignore rest.
     // The text 'OK' should be probably localized. iOS Alert does that in native.
-    const validButtons: Buttons = buttons ? buttons.slice(0, 3) : [{text: 'OK'}];
+    const validButtons = buttons ? buttons.slice(0, 3) : [{text: 'OK'}];
     const buttonPositive = validButtons.pop();
     const buttonNegative = validButtons.pop();
     const buttonNeutral = validButtons.pop();
